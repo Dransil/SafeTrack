@@ -21,10 +21,8 @@ const RegistroScreen = () => {
     }else {
       try {
         const auth = getAuth();
-        // Crear un nuevo usuario con correo y contraseña
         await createUserWithEmailAndPassword(auth, email, password);
         Alert.alert('Registro Exitoso', 'Usuario registrado correctamente.');
-        // Puedes redirigir a la pantalla de inicio de sesión u otra pantalla después del registro
         navigation.navigate('Menú');
       } catch (error) {
         console.error('Error al registrar usuario:', error.message);
