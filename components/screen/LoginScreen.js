@@ -2,25 +2,45 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { validateEmail } from '../utils/Verificador';
+import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail }from 'firebase/auth';
+
+const auth = getAuth();
+
 const LoginScreen = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
+  const handleLogin = async() => {
     if (email.trim() === '' || password.trim() === '') {
       Alert.alert('Error', 'Por favor, ingresa el correo y la contraseña.');
     } else if (!validateEmail(email)) {
       Alert.alert('Error', 'Por favor, ingresa un correo electrónico válido.');
     } else {
-      // Aquí puedes realizar la lógica de autenticación y, si es exitosa, navegar a la pantalla principal.
-      navigation.navigate('Menú');
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        console.log('Usuario autenticado con éxito.');
+        navigation.navigate('Menú');
+      } catch (error) {
+        console.error('Error al autenticar el usuario:', error.message);
+        Alert.alert('Error', 'Usuario o contraseña incorrectos');
+      }
     }
   };
 
-  const handleForgotPassword = () => {
-    // Implementa la lógica para manejar el caso de "Olvidaste la contraseña".
-    Alert.alert('Olvidaste la Contraseña', 'Se ha enviado un correo electrónico de recuperación.');
+  const handleForgotPassword = async () => {
+    if (email.trim() === '' || !validateEmail(email)) {
+      Alert.alert('Error', 'Por favor, ingresa un correo electrónico válido.');
+    } else {
+      try {
+        const auth = getAuth();
+        await sendPasswordResetEmail(auth, email);
+        Alert.alert('Correo Enviado', 'Se ha enviado un correo electrónico de recuperación.');
+      } catch (error) {
+        console.error('Error al enviar correo de recuperación:', error.message);
+        Alert.alert('Error', 'Hubo un error al enviar el correo de recuperación. Por favor, inténtalo de nuevo.');
+      }
+    }
   };
 
   const handleRegister = () => {

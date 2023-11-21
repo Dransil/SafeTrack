@@ -2,37 +2,40 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { validateEmail } from '../utils/Verificador';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
 const RegistroScreen = () => {
   const navigation = useNavigation();
-  const [name, setName] = useState('');
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleRegistro = () => {
-    if (name.trim() === '' || email.trim() === '' || password.trim() === '' || confirmPassword.trim() === '') {
+  const handleRegistro = async () => {
+    if (email.trim() === '' || password.trim() === '' || confirmPassword.trim() === '') {
       Alert.alert('Error', 'Por favor, completa todos loss campos.');
     } else if(!validateEmail(email)){
       Alert.alert('Error', 'Por favor, ingresa un correo electrónico válido.');
     } else if (password !== confirmPassword) {
       Alert.alert('Error', 'Las contraseñas no coinciden.');
     }else {
-      // Aquí puedes realizar la lógica de registro y, si es exitosa, navegar a la pantalla principal.
-      navigation.navigate('Menú');
+      try {
+        const auth = getAuth();
+        // Crear un nuevo usuario con correo y contraseña
+        await createUserWithEmailAndPassword(auth, email, password);
+        Alert.alert('Registro Exitoso', 'Usuario registrado correctamente.');
+        // Puedes redirigir a la pantalla de inicio de sesión u otra pantalla después del registro
+        navigation.navigate('Menú');
+      } catch (error) {
+        console.error('Error al registrar usuario:', error.message);
+        Alert.alert('Error', 'Hubo un error durante el registro. Por favor, inténtalo de nuevo.');
+      }
     }
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.titulo}>Registrarse</Text>
-      <Text style={styles.texto}>Introduzca su nombre</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Nombre"
-        onChangeText={(text) => setName(text)}
-        value={name}
-      />
       <Text style={styles.texto}>Introduzca su correo</Text>
       <TextInput
         style={[styles.input, !validateEmail(email) && styles.inputError]}
