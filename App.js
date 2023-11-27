@@ -7,7 +7,6 @@ import RegistroScreen from './screen/RegistroScreen';
 
 const Stack = createStackNavigator();
 
-
 const App = () => {
   
   return (

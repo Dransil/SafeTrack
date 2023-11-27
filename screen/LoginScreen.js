@@ -24,7 +24,6 @@ const LoginScreen = () => {
         console.error('Error al autenticar el usuario:', error.message);
         Alert.alert('Error', 'Usuario o contraseña incorrectos');
       }
-      Alert.alert('Error', 'Usuario o contraseña incorrectos');
       navigation.navigate('Menú');
     }
   };
