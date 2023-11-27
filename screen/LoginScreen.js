@@ -5,7 +5,7 @@ import { validateEmail } from '../utils/Verificador';
 import { auth } from '../config';
 import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail }from 'firebase/auth';
 
-const LoginScreen = () => {
+export const LoginScreen = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -19,12 +19,11 @@ const LoginScreen = () => {
       try {
         await signInWithEmailAndPassword(auth, email, password);
         console.log('Usuario autenticado con éxito.');
-        navigation.navigate('Menú');
+        navigation.navigate('Menu');
       } catch (error) {
         console.error('Error al autenticar el usuario:', error.message);
         Alert.alert('Error', 'Usuario o contraseña incorrectos');
       }
-      navigation.navigate('Menú');
     }
   };
 
@@ -44,7 +43,7 @@ const LoginScreen = () => {
   };
 
   const handleRegister = () => {
-    navigation.navigate('Registro');
+    navigation.navigate('Register');
   };
 
   const handleLoginWithGoogle = () => {
@@ -132,5 +131,3 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 });
-
-export default LoginScreen;

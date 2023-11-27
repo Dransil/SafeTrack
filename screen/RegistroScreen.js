@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { validateEmail } from '../utils/Verificador';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
-const RegistroScreen = () => {
+export const RegistroScreen = () => {
   const navigation = useNavigation();
 
   const [email, setEmail] = useState('');
@@ -23,7 +23,7 @@ const RegistroScreen = () => {
         const auth = getAuth();
         await createUserWithEmailAndPassword(auth, email, password);
         Alert.alert('Registro Exitoso', 'Usuario registrado correctamente.');
-        navigation.navigate('Menú');
+        navigation.navigate('Menu');
       } catch (error) {
         console.error('Error al registrar usuario:', error.message);
         Alert.alert('Error', 'Hubo un error durante el registro. Por favor, inténtalo de nuevo.');

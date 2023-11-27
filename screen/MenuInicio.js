@@ -1,10 +1,18 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { auth } from '../config';
+import { signOut } from 'firebase/auth';
 
-const MenuInicio = () => {
+export const MenuInicio = () => {
+  const handleLogout = () =>{
+    signOut(auth).catch(error => console.log('Error al salir de cuenta', error));
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.titulo}>¡Bienvenido a la Página Principal!</Text>
+      <TouchableOpacity style={styles.ButtonMenu} onPress={handleLogout}>
+        <Text style={styles.textoBoton}>Salir</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -20,6 +28,14 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
   },
+  ButtonMenu: {
+    backgroundColor: '#4285F4', 
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 10,
+  },
+  textoBoton: {
+    color: 'white',
+    fontSize: 16,
+  },
 });
-
-export default MenuInicio;
