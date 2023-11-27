@@ -28,6 +28,7 @@ const RegistroScreen = () => {
         console.error('Error al registrar usuario:', error.message);
         Alert.alert('Error', 'Hubo un error durante el registro. Por favor, inténtalo de nuevo.');
       }
+      Alert.alert('Error', 'Hubo un error durante el registro. Por favor, inténtalo de nuevo.');
     }
   };
 

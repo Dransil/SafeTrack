@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { validateEmail } from '../utils/Verificador';
+import { auth } from '../config';
 import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail }from 'firebase/auth';
-
-const auth = getAuth();
 
 const LoginScreen = () => {
   const navigation = useNavigation();
@@ -25,6 +24,8 @@ const LoginScreen = () => {
         console.error('Error al autenticar el usuario:', error.message);
         Alert.alert('Error', 'Usuario o contraseña incorrectos');
       }
+      Alert.alert('Error', 'Usuario o contraseña incorrectos');
+      navigation.navigate('Menú');
     }
   };
 
@@ -44,12 +45,10 @@ const LoginScreen = () => {
   };
 
   const handleRegister = () => {
-    // Implementa la lógica para manejar el caso de "Registrarse".
     navigation.navigate('Registro');
   };
 
   const handleLoginWithGoogle = () => {
-    // Implementa la lógica para manejar la autenticación con Google.
     Alert.alert('Iniciar Sesión con Google', 'Iniciando sesión con Google...');
   };
 
