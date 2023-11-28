@@ -1,14 +1,14 @@
 import { initializeApp } from "firebase/app";
 import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import {API_KEY, AUTH_DOMAIN, PROJECT_ID, STORAGE_BUCKET, MESSAGING_SENDER_ID, APP_ID} from '@env';
 const firebaseConfig = {
-  apiKey: "AIzaSyBpo9N1P9xiAO2wnNbzbO6NQwd594jaACg",
-  authDomain: "streactfb.firebaseapp.com",
-  projectId: "streactfb",
-  storageBucket: "streactfb.appspot.com",
-  messagingSenderId: "287872267084",
-  appId: "1:287872267084:web:45b2fd696585faee1155e9",
+  apiKey: API_KEY,
+  authDomain: AUTH_DOMAIN,
+  projectId: PROJECT_ID,
+  storageBucket: STORAGE_BUCKET,
+  messagingSenderId: MESSAGING_SENDER_ID,
+  appId: APP_ID,
 };
 const app = initializeApp(firebaseConfig);
 const auth = initializeAuth(app, {
