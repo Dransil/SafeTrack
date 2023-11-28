@@ -27,19 +27,8 @@ export const LoginScreen = () => {
     }
   };
 
-  const handleForgotPassword = async () => {
-    if (email.trim() === '' || !validateEmail(email)) {
-      Alert.alert('Error', 'Por favor, ingresa un correo electrónico válido.');
-    } else {
-      try {
-        const auth = getAuth();
-        await sendPasswordResetEmail(auth, email);
-        Alert.alert('Correo Enviado', 'Se ha enviado un correo electrónico de recuperación.');
-      } catch (error) {
-        console.error('Error al enviar correo de recuperación:', error.message);
-        Alert.alert('Error', 'Hubo un error al enviar el correo de recuperación. Por favor, inténtalo de nuevo.');
-      }
-    }
+  const handleForgotPassword = () => {
+    navigation.navigate('PasswordReset');
   };
 
   const handleRegister = () => {
@@ -54,7 +43,7 @@ export const LoginScreen = () => {
     <View style={styles.container}>
       <Text style={styles.titulo}>Iniciar Sesión</Text>
       <TextInput
-        style={[styles.input, !validateEmail(email) && styles.inputError]}
+        style={[styles.input, (email.trim() !== '' && !validateEmail(email)) && styles.inputError]}
         placeholder="Correo electrónico"
         onChangeText={(text) => setEmail(text)}
         value={email}
@@ -125,7 +114,7 @@ const styles = StyleSheet.create({
   },
 
   googleButton: {
-    backgroundColor: '#4285F4', // Color de Google
+    backgroundColor: '#4285F4', 
     padding: 10,
     borderRadius: 5,
     marginTop: 10,
