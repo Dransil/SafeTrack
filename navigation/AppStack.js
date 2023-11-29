@@ -9,14 +9,14 @@ const Tab = createBottomTabNavigator();
 
 function TabsPrueba (){
   return (
-    <Tab.Navigator>
-      <Tab.Screen name='Home' component={MenuInicio}/>
+    <Tab.Navigator screenOptions={{ headerShown: false }}>
+      <Tab.Screen name='Home' component={ MenuInicio }/>
     </Tab.Navigator>
   );
 }
 export const AppStack = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name='Menu' component={ TabsPrueba } />
     </Stack.Navigator>
   );
