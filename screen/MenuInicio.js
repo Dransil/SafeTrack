@@ -9,7 +9,7 @@ export const MenuInicio = () => {
   }
   return (
     <View style={styles.container}>
-      <Text style={styles.titulo}>¡Bienvenido a la Página Principal!</Text>
+      <Text style={styles.titulo}>¡Bienvenido a la Página Principal 2!</Text>
       <TouchableOpacity style={styles.ButtonMenu} onPress={handleLogout}>
         <Text style={styles.textoBoton}>Salir</Text>
       </TouchableOpacity>
