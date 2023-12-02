@@ -11,6 +11,8 @@ function TabsPrueba (){
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
       <Tab.Screen name='Home' component={ MenuInicio }/>
+      <Tab.Screen name='Home2' component={ MenuInicio }/>
+      <Tab.Screen name='Home3' component={ MenuInicio }/>
     </Tab.Navigator>
   );
 }
