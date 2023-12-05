@@ -3,8 +3,8 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'reac
 import { useNavigation } from '@react-navigation/native';
 import { validateEmail } from '../utils/Verificador';
 import { auth } from '../config';
-import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail }from 'firebase/auth';
-
+import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
+import { ANDROID_KEY } from '@env';
 export const LoginScreen = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
@@ -37,6 +37,7 @@ export const LoginScreen = () => {
 
   const handleLoginWithGoogle = () => {
     Alert.alert('Iniciar Sesión con Google', 'Iniciando sesión con Google...');
+    console.log(ANDROID_KEY);
   };
 
   return (
